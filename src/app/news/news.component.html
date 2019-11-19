@@ -1,0 +1,43 @@
+<ng-container *ngIf="!pending; else Spinner">
+  <section class="filters">
+    <div class="filter-container">
+      <input type="text" [(ngModel)]="filtersData.searchString" (ngModelChange)="changeSearchString($event)" placeholder="Search string">
+    </div>
+    <div class="filter-container">
+      <ng-select [items]="allCountries"
+                 bindLabel="name"
+                 autofocus
+                 bindValue="id"
+                 [(ngModel)]="filtersData.selectedCountry">
+      </ng-select>
+    </div>
+    <div class="filter-container">
+      <ng-select [items]="allCategories"
+                 bindLabel="name"
+                 autofocus
+                 bindValue="id"
+                 [(ngModel)]="filtersData.selectedCategory">
+      </ng-select>
+    </div>
+    <button class="search-button" (click)="getNewsData()">Search</button>
+  </section>
+  <section  class="news-container container">
+    <div class="article-container" *ngFor="let article of news.articles">
+      <img *ngIf="article.urlToImage" class="article-image-preview" src="{{article.urlToImage}}">
+      <div class="article-content">
+        <div class="title">{{article.title}}</div>
+        <div class="description">{{article.description}}</div>
+        <div class="article-footer">
+          <div class="publishedAt">{{article.publishedAt | date: 'dd.MM.yyyy'}}</div>
+          <div class="author">{{article.author}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="pagination-container">
+    <pagination [totalItems]="news.totalResults" [itemsPerPage]="pagerData.pageSize" [(ngModel)]="pagerData.currentPage" (pageChanged)="pageChanged($event)"></pagination>
+  </section>
+</ng-container>
+<ng-template #Spinner>
+  Spinner
+</ng-template>
