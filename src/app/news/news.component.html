@@ -5,21 +5,18 @@
     </div>
     <div class="filter-container">
       <ng-select [items]="allCountries"
-                 bindLabel="name"
-                 autofocus
-                 bindValue="id"
-                 [(ngModel)]="filtersData.selectedCountry">
+                 bindLabel="country"
+                 [(ngModel)]="filtersData.selectedCountry"
+                 (ngModelChange)="getNewsData()">
       </ng-select>
     </div>
     <div class="filter-container">
       <ng-select [items]="allCategories"
-                 bindLabel="name"
-                 autofocus
-                 bindValue="id"
-                 [(ngModel)]="filtersData.selectedCategory">
+                 bindLabel="category"
+                 [(ngModel)]="filtersData.selectedCategory"
+                 (ngModelChange)="getNewsData()">
       </ng-select>
     </div>
-    <button class="search-button" (click)="getNewsData()">Search</button>
   </section>
   <section  class="news-container container">
     <div class="article-container" *ngFor="let article of news.articles">

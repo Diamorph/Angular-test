@@ -36,6 +36,8 @@ export class NewsComponent implements OnInit {
   public changeSearchString($event): void {
     if (this.filtersData.searchString.length > 2) {
       this.getNewsData(this.filtersData.searchString);
+    } else {
+      this.getNewsData();
     }
   }
   public getNewsData(searchString?: string): void {   // or | async - i prefer this vay
